@@ -17,7 +17,7 @@ import Dialog from './Dialog'
 import Avatar from './Avatar'
 import Rating from './Rating'
 import Slider from './Slider'
-import Button from './Button'
+import { Button } from './Button'
 import Switch from './Switch'
 import Select from './Select'
 import SvgIcon from './SvgIcon'
@@ -41,9 +41,7 @@ import Autocomplete from './Autocomplete'
 import ToggleButton from './ToggleButton'
 import ControlLabel from './ControlLabel'
 import LoadingButton from './LoadingButton'
-import List from '@/theme/overrides/List'
-import { Button } from '@/theme/overrides/Button'
-import { IconButton } from '@/theme/overrides/IconButton'
+import { IconButton } from './IconButton'
 import type { CustomShadows, Shadows } from '@/theme/theme-config/shadows'
 import type { Palette, ThemeMode } from '@/theme/theme-config/palette'
 
@@ -69,6 +67,7 @@ export function mergeOverrideComps(theme: CustomThemeOptions) {
     Chip(theme),
     Card(theme),
     Menu(theme),
+    IconButton(theme),
     Link(theme),
     Input(theme),
     Radio(theme),
