@@ -23,7 +23,7 @@ export function AppLayout(props: { children: ReactNode }) {
             },
           }} />
         <Box
-          className={'flex justify-center'}
+          className={'relative top-16'}
           children={props.children}
         />
         <Footer />

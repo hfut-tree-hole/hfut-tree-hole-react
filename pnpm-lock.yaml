@@ -24,6 +24,7 @@ specifiers:
   lodash: ^4.17.21
   mobx-react: ^7.3.0
   mockjs: ^1.1.0
+  modern-normalize: ^1.1.0
   postcss: ^8.4.8
   prettier: ^2.5.1
   react: ^17.0.2
@@ -47,6 +48,7 @@ dependencies:
   lodash: registry.npmmirror.com/lodash/4.17.21
   mobx-react: registry.npmmirror.com/mobx-react/7.3.0_react-dom@17.0.2+react@17.0.2
   mockjs: registry.npmmirror.com/mockjs/1.1.0
+  modern-normalize: registry.npmmirror.com/modern-normalize/1.1.0
   react: registry.npmmirror.com/react/17.0.2
   react-dom: registry.npmmirror.com/react-dom/17.0.2_react@17.0.2
   react-hook-form: registry.npmmirror.com/react-hook-form/7.27.1_react@17.0.2
@@ -3899,6 +3901,13 @@ packages:
     hasBin: true
     dependencies:
       commander: registry.npmmirror.com/commander/9.0.0
+    dev: false
+
+  registry.npmmirror.com/modern-normalize/1.1.0:
+    resolution: {integrity: sha512-2lMlY1Yc1+CUy0gw4H95uNN7vjbpoED7NNRSBHE25nWfLBdmMzFCsPshlzbxHz+gYMcBEUN8V4pU16prcdPSgA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/modern-normalize/-/modern-normalize-1.1.0.tgz}
+    name: modern-normalize
+    version: 1.1.0
+    engines: {node: '>=6'}
     dev: false
 
   registry.npmmirror.com/ms/2.0.0:

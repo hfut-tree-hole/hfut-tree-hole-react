@@ -9,7 +9,7 @@ export interface Interceptors {
   response?: ResponseInterceptor[] | ResponseInterceptor
 }
 
-export type KeyofInterceptors = keyof Interceptors
+export type KeyofInterceptors = keyof Interceptors 
 
 export function addInterceptor(
   instance: AxiosInstance,

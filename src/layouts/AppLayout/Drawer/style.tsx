@@ -52,7 +52,6 @@ export const ListItemTextStyle = styled(ListItemText, {
   transition: theme.transitions.create(['width', 'opacity'], {
     duration: theme.transitions.duration.shorter,
   }),
-  fontSize: '14px',
   color: 'inherit',
 }))
 

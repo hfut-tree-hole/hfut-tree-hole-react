@@ -1,27 +1,33 @@
 import { Box, List, ListItemText } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useCallback } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, Navigate, useLocation } from 'react-router-dom'
 import { ListItemIconStyle, ListItemStyle, ListItemTextStyle, ListSubheaderStyle } from './style'
 import type { IDrawerSideConfig } from '@/layouts/AppLayout/Drawer/Drawer'
 
 export function DrawerList({ list }: { list: IDrawerSideConfig[] }) {
   const theme = useTheme()
   const { pathname } = useLocation()
+  console.log(pathname)
 
-  const isActive = useCallback((path: string) => path === pathname, [])
+  const isActive = (path: string) => path === pathname
 
   return <Box style={{ padding: '5%' }}>
     {list.map(item => (
       <List key={item.subheader} >
         <ListSubheaderStyle>{item.subheader}</ListSubheaderStyle>
         {item.items.map(subItem => (
-          <ListItemStyle activeRoot={isActive(subItem.path)} key={subItem.title} theme={theme}>
-            <ListItemIconStyle>{subItem.icon}</ListItemIconStyle>
-            <ListItemText sx={{
-              color: 'inherit',
-            }} className={'text-sm'}>{subItem.title}</ListItemText>
-          </ListItemStyle>
+          <Link to={subItem.path} key={subItem.title}>
+            <ListItemStyle activeRoot={isActive(subItem.path)} theme={theme}>
+              <ListItemIconStyle>{subItem.icon}</ListItemIconStyle>
+              <ListItemText sx={{
+                'color': 'inherit',
+                '& span': {
+                  fontSize: '0.875rem',
+                },
+              }} className={'text-sm'}>{subItem.title}</ListItemText>
+            </ListItemStyle>
+          </Link>
         ))}
       </List>
     ))}
