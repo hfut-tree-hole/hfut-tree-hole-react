@@ -53,6 +53,7 @@ export interface CustomThemeOptions {
   components?: any
   typography: any
   mode: ThemeMode
+  [key: string]: any
 }
 
 export type OverrideFn = (theme: CustomThemeOptions) => Required<ThemeOptions>['components']

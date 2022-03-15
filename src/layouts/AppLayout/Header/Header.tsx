@@ -1,13 +1,12 @@
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
-import type { AppBarProps } from '@mui/material'
+import type { AppBarProps, Theme } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import MuiAppBar from '@mui/material/AppBar'
-import { MenuIcon } from '@/assets/svg/icon/menu'
 import { Searchbar } from '@/components/Searchbar'
 import { useWindowSize } from '@/hooks/use-window-size'
 import type { Fn } from '@/shared/types'
-import { drawerWidth } from '@/layouts/AppLayout/AppLayout'
+import { drawerWidth } from '@/layouts/AppLayout/Drawer/Drawer'
 
 const Header = styled(MuiAppBar, {
   shouldForwardProp: prop => prop !== 'open',
@@ -44,7 +43,6 @@ export function AppHeader(props: { open: boolean; handleDrawerOpen: Fn }) {
             onClick={props.handleDrawerOpen}
             sx={{ mr: 2, ...(props.open && { display: 'none' }) }}
           >
-            <MenuIcon />
           </IconButton>
           : ''}
         <Searchbar />

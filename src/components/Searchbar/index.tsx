@@ -6,8 +6,6 @@ import IconButton from '@mui/material/IconButton'
 import { SearchIcon } from '@/assets/svg/icon/search'
 import cssStyles from '@/theme/utils/cssStyles'
 
-// ----------------------------------------------------------------------
-
 const APPBAR_MOBILE = 64
 const APPBAR_DESKTOP = 92
 
