@@ -92,7 +92,7 @@
 │  └─icon
 │          blog.tsx
 │          calendar.tsx
-│          dashbordIcons.tsx
+│          Icons.tsx
 │          menu.tsx
 │          search.tsx
 │
@@ -128,7 +128,7 @@
 │      Menu.ts
 │      Pagination.ts
 │      Paper.ts
-│      Popover.ts
+│      HeaderPopover.ts
 │      Progress.ts
 │      Radio.ts
 │      Rating.tsx
