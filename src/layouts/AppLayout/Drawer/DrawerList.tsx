@@ -1,8 +1,7 @@
 import { Box, List, ListItemText } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { useCallback } from 'react'
-import { Link, Navigate, useLocation } from 'react-router-dom'
-import { ListItemIconStyle, ListItemStyle, ListItemTextStyle, ListSubheaderStyle } from './style'
+import { Link, useLocation } from 'react-router-dom'
+import { ListItemIconStyle, ListItemStyle, ListSubheaderStyle } from './style'
 import type { IDrawerSideConfig } from '@/layouts/AppLayout/Drawer/Drawer'
 
 export function DrawerList({ list }: { list: IDrawerSideConfig[] }) {
