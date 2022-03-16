@@ -1,9 +1,13 @@
 import type { RouteObject } from 'react-router-dom'
-import { useRoutes } from 'react-router-dom'
+import { Navigate, useRoutes } from 'react-router-dom'
 import { Login } from '@/pages/Login'
 import { Home } from '@/pages/Home/Home'
 import { Blog } from '@/pages/Blog/Blog'
 const routes: RouteObject[] = [
+  {
+    path: '/',
+    element: <Navigate to={'/home'} />,
+  },
   {
     path: '/login',
     element: <Login />,
