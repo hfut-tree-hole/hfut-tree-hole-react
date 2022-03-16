@@ -5,7 +5,7 @@ import type { ReactNode } from 'react'
 import { DrawerHeader } from './DrawerHeader'
 import { DrawerList } from './DrawerList'
 import { NAVBAR } from '@/shared/config/theme'
-import { ICONS } from '@/assets/svg/icon/dashbordIcons'
+import { ICONS } from '@/assets/svg/icon/Icons'
 
 export const drawerWidth = 300
 

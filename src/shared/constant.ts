@@ -7,3 +7,5 @@ export const enum RESPONSE_DESIGN {
 }
 
 export const MODE_KEY = '__MODE_KEY__'
+
+export const USER_KEY = '__USER_KEY__'

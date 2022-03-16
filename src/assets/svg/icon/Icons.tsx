@@ -34,3 +34,5 @@ export const ICONS = {
   dashboard: getIcon('ic_dashboard'),
   booking: getIcon('ic_booking'),
 }
+
+export const BellIcon = getIcon('ic_bell')
