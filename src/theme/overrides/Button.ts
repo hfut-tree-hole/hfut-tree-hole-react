@@ -5,7 +5,6 @@ export const Button = overrideComp((theme) => {
     MuiButton: {
       styleOverrides: {
         root: {
-          'backgroundColor': theme.palette.primary.main,
           '&:hover': {
             boxShadow: 'none',
           },
@@ -14,6 +13,7 @@ export const Button = overrideComp((theme) => {
           height: 48,
         },
         containedInherit: {
+          'backgroundColor': theme.palette.primary.main,
           'color': theme.palette.grey[800],
           'boxShadow': theme.customShadows.z8,
           '&:hover': {
