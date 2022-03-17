@@ -22,6 +22,7 @@ export function HeaderPopover({ children, menuChildren = <></> }: { children: Re
         height: 40,
         ...(open && {
           bgcolor: theme => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity),
+          color: theme => theme.palette.primary.main,
         }),
       }}>
         {children}
