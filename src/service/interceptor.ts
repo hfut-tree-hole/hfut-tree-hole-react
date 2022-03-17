@@ -9,7 +9,7 @@ export interface Interceptors {
   response?: ResponseInterceptor[] | ResponseInterceptor
 }
 
-export type KeyofInterceptors = keyof Interceptors 
+export type KeyofInterceptors = keyof Interceptors
 
 export function addInterceptor(
   instance: AxiosInstance,
@@ -25,9 +25,8 @@ export function addInterceptor(
 
   (Object.keys(interceptor) as KeyofInterceptors[]).forEach((item) => {
     (interceptor[item] as Interceptors[typeof item][])!.forEach((interItem) => {
-      instance.interceptors[item].use(
-        interItem as ResponseInterceptor | RequestInterceptor,
-      )
+      // @ts-expect-error
+      instance.interceptors[item].use(interItem as ResponseInterceptor | RequestInterceptor)
     })
   })
 }
