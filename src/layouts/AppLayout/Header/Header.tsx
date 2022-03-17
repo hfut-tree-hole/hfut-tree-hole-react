@@ -16,7 +16,7 @@ import { UserAvatar } from '@/layouts/AppLayout/Header/Avatar'
 
 const Header = styled(MuiAppBar, {
   shouldForwardProp: prop => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
+})<AppBarProps & { open: boolean }>(({ theme, open }) => ({
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
