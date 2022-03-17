@@ -9,3 +9,7 @@ export const enum RESPONSE_DESIGN {
 export const MODE_KEY = '__MODE_KEY__'
 
 export const USER_KEY = '__USER_KEY__'
+
+const userAgent = typeof navigator === 'undefined' ? 'SSR' : navigator.userAgent
+
+export const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
