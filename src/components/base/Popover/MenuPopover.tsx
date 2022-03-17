@@ -1,4 +1,4 @@
-import type { PopoverProps, SxProps } from '@mui/material'
+import type { PopoverProps } from '@mui/material'
 import { Popover } from '@mui/material'
 import type { ReactNode } from 'react'
 

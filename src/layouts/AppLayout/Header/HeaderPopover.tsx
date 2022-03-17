@@ -1,10 +1,11 @@
 import type { MouseEvent, ReactNode } from 'react'
 import { useCallback, useState } from 'react'
+import type { PopoverProps } from '@mui/material'
 import { Box, IconButton } from '@mui/material'
 import { alpha } from '@mui/material/styles'
 import MenuPopover from '@/components/base/Popover/MenuPopover'
 
-export function HeaderPopover({ children, menuChildren = <></> }: { children: ReactNode; menuChildren?: ReactNode }) {
+export function HeaderPopover({ children, menuChildren = <></>, menuProps }: { children: ReactNode; menuChildren?: ReactNode; menuProps?: Omit<PopoverProps, 'open'> }) {
   const [open, setOpen] = useState(false)
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
   const handleClose = useCallback(() => {
@@ -32,7 +33,9 @@ export function HeaderPopover({ children, menuChildren = <></> }: { children: Re
         open,
         anchorEl,
         onClose: handleClose,
+        ...(menuProps || {}),
       }} children={menuChildren}/>
+
     </Box>
   </>
 }
