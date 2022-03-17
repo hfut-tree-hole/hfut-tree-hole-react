@@ -5,6 +5,7 @@ specifiers:
   '@antfu/ni': ^0.13.2
   '@emotion/react': ^11.8.1
   '@emotion/styled': ^11.8.1
+  '@iconify/react': ^3.1.4
   '@mui/icons-material': ^5.4.4
   '@mui/material': ^5.4.4
   '@types/good-storage': ^1.1.0
@@ -41,6 +42,7 @@ specifiers:
 dependencies:
   '@emotion/react': registry.npmmirror.com/@emotion/react/11.8.1_00d6772dea80510e818fd171caaa025a
   '@emotion/styled': registry.npmmirror.com/@emotion/styled/11.8.1_35774467555e9088dcc222da78297fe2
+  '@iconify/react': registry.npmmirror.com/@iconify/react/3.1.4
   '@mui/icons-material': registry.npmmirror.com/@mui/icons-material/5.5.0_e26da9a06063015d999cdabd2929947d
   '@mui/material': registry.npmmirror.com/@mui/material/5.5.0_cc046292e2a161659fc089df7011b5cc
   axios: registry.npmmirror.com/axios/0.26.1
@@ -802,6 +804,12 @@ packages:
     name: '@humanwhocodes/object-schema'
     version: 1.2.1
     dev: true
+
+  registry.npmmirror.com/@iconify/react/3.1.4:
+    resolution: {integrity: sha512-+QOrRkFLw7evkrcoClrDmALM/L8gAZVjnPBmShvGAFhh9EqVLX7bBwlEbSEyUFK1f/54f1HSJIJF8Xz+cbNvow==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@iconify/react/-/react-3.1.4.tgz}
+    name: '@iconify/react'
+    version: 3.1.4
+    dev: false
 
   registry.npmmirror.com/@jridgewell/resolve-uri/3.0.5:
     resolution: {integrity: sha512-VPeQ7+wH0itvQxnG+lIzWgkysKIr3L9sslimFW55rHMdGu/qCQ5z5h9zq4gI8uBtqkpHhsF4Z/OwExufUCThew==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@jridgewell/resolve-uri/-/resolve-uri-3.0.5.tgz}
