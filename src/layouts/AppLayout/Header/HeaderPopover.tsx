@@ -33,6 +33,7 @@ export function HeaderPopover({ children, menuChildren = <></>, menuProps }: { c
         open,
         anchorEl,
         onClose: handleClose,
+        sx: { width: 360, p: 0, mt: 1.5, ml: 0.75 },
         ...(menuProps || {}),
       }} children={menuChildren}/>
 

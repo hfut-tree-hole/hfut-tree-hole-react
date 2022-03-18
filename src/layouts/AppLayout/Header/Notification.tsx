@@ -31,9 +31,6 @@ function NotificationItem({ item }: { item: NotificationsDto }) {
         py: 1.5,
         px: 2.5,
         mt: '1px',
-        ...((!item.isRead && {
-          bgcolor: 'action.selected',
-        })),
       }}
     >
       <ListItemAvatar>

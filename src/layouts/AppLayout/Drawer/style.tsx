@@ -1,11 +1,12 @@
 import { alpha, styled } from '@mui/material/styles'
+import type { ThemeOptions } from '@mui/material'
 import { ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { ICON, NAVBAR } from '@/shared/config/theme'
 import type { CustomThemeOptions } from '@/theme/overrides'
 
 export const ListItemStyle = styled(ListItemButton, {
   shouldForwardProp: prop => prop !== 'activeRoot' && prop !== 'activeSub' && prop !== 'subItem',
-})(({ activeRoot, theme }: { activeRoot: boolean; theme: CustomThemeOptions }) => ({
+})(({ activeRoot, theme }: { activeRoot: boolean; theme: ThemeOptions }) => ({
   ...theme.typography.body2,
   position: 'relative',
   height: NAVBAR.DASHBOARD_ITEM_ROOT_HEIGHT,
