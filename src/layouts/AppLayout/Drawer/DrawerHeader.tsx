@@ -4,6 +4,7 @@ import { useAuth } from '@/hooks/use-auth'
 
 export function DrawerHeader() {
   const user = useAuth()
+
   return <>
     <Box className={'flex flex-col p-5'}>
       <div className={'mb-5'}>
@@ -14,8 +15,8 @@ export function DrawerHeader() {
           <img className={'rounded-full'} src={user.avatar}/>
         </div>
         <div className={'flex flex-col ml-3'}>
-          <p className={'text-base font-semibold'}>name</p>
-          <p className={'text-sm text-gray-500'}>status</p>
+          <p className={'text-base font-semibold'}>{user.username}</p>
+          <p className={'text-sm text-gray-500'}>{user.grade.class}</p>
         </div>
       </div>
     </Box>

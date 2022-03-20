@@ -1,9 +1,22 @@
 import Box from '@mui/material/Box'
 import type { ReactNode } from 'react'
+import { styled } from '@mui/material/styles'
+import type { BoxProps } from '@mui/material/Box/Box'
 import { Footer } from '@/components/Footer'
 import { useDrawer } from '@/layouts/AppLayout/use-drawer'
 import { AppHeader } from '@/layouts/AppLayout/Header/Header'
-import { Drawer } from '@/layouts/AppLayout/Drawer/Drawer'
+import { Drawer, drawerWidth } from '@/layouts/AppLayout/Drawer/Drawer'
+
+const RouterView = styled(Box)<BoxProps>(({ theme }) => ({
+  position: 'relative',
+  [theme.breakpoints.up('sm')]: {
+    left: `${drawerWidth}px`,
+    width: `calc(100vw - ${drawerWidth})px`,
+  },
+  left: 0,
+  top: 60,
+  width: '100vw',
+}))
 
 export function AppLayout(props: { children: ReactNode }) {
   const { open, variant, handleDrawerClose, handleDrawerOpen } = useDrawer()
@@ -22,8 +35,7 @@ export function AppLayout(props: { children: ReactNode }) {
               bgcolor: 'background.default',
             },
           }} />
-        <Box
-          className={'relative top-16'}
+        <RouterView
           children={props.children}
         />
         <Footer />

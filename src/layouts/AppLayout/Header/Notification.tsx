@@ -79,7 +79,7 @@ function NotificationList({ totalUnread, handleMarkAllAsRead }: { totalUnread: n
     </Box>
 
     <Divider sx={{ borderStyle: 'dashed' }} />
-    <Scrollbar sx={{ maxHeight: { xs: '400px', sm: 'auto' } }}>
+    <Scrollbar sx={{ maxHeight: '400px' }}>
       <List
         sx={{ maxHeight: '400px' }}
         subheader={

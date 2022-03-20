@@ -87,3 +87,14 @@ export const contactListData: ContactListDto[] = [
     onlineStatus: 'online',
   },
 ]
+
+export const UserData = {
+  username: 'snowingfox',
+  studentId: '2021xxxxxx',
+  avatar: avatarUrl,
+  email: 'MSnowingFox@outlook.com',
+  grade: {
+    department: '计算机与信息系',
+    class: '电信科21-x班',
+  },
+}
