@@ -1,15 +1,11 @@
 import useLocalStorage from '@/hooks/use-local-storage'
 import { USER_KEY } from '@/shared/constant'
-import { avatarUrl } from '@/_mock_'
-
-const defaultVal = {
-  avatar: avatarUrl,
-}
+import { UserData } from '@/_mock_'
 
 // TODO use context
 
-export function useAuth(): typeof defaultVal {
-  const [user] = useLocalStorage(USER_KEY, defaultVal)
+export function useAuth() {
+  const [user] = useLocalStorage(USER_KEY, UserData)
 
   return user
 }

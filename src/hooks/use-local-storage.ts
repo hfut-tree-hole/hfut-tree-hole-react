@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import storage from 'good-storage'
 
-export default function useLocalStorage(key: string, defaultValue: any) {
-  const [value, setValue] = useState(() => {
+export default function useLocalStorage<T = any>(key: string, defaultValue: T): [T, (newVal: T) => void] {
+  const [value, setValue] = useState<T>(() => {
     const storedValue = localStorage.getItem(key)
     return storedValue === null ? defaultValue : JSON.parse(storedValue)
   })
