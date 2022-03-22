@@ -1,4 +1,4 @@
-import { RootRoutes } from '@/route'
+import { RootRoutes } from '@/router'
 import './App.css'
 import { AppLayout } from '@/layouts/AppLayout/AppLayout'
 

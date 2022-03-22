@@ -3,6 +3,8 @@ import { Navigate, useRoutes } from 'react-router-dom'
 import { Login } from '@/pages/Login'
 import { Home } from '@/pages/Home/Home'
 import { Blog } from '@/pages/Blog/Blog'
+import { TodoList } from '@/pages/TodoList/TodoList'
+
 const routes: RouteObject[] = [
   {
     path: '/',
@@ -19,6 +21,10 @@ const routes: RouteObject[] = [
   {
     path: '/blog',
     element: <Blog />,
+  },
+  {
+    path: '/todolist',
+    element: <TodoList />,
   },
 ]
 
