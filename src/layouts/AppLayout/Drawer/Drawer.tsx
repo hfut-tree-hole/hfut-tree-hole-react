@@ -14,13 +14,21 @@ export interface IDrawerSideConfig {
   items: { title: string; path: string; icon: ReactNode; children?: IDrawerSideConfig['items'] }[]
 }
 
-const DrawerSideConfig: IDrawerSideConfig[] = [{
-  subheader: '主页',
-  items: [
-    { title: 'home', path: '/home', icon: ICONS.dashboard },
-    { title: 'blog', path: '/blog', icon: ICONS.blog },
-  ],
-}]
+const DrawerSideConfig: IDrawerSideConfig[] = [
+  {
+    subheader: '常用功能',
+    items: [
+      { title: '主页', path: '/home', icon: ICONS.dashboard },
+      { title: '博客', path: '/blog', icon: ICONS.blog },
+    ],
+  },
+  {
+    subheader: 'App',
+    items: [
+      { title: 'Todolist', path: '/todolist', icon: ICONS.calendar },
+    ],
+  },
+]
 
 const DrawerStyle = styled(MuiDrawer)(({ theme }) => (
   {
