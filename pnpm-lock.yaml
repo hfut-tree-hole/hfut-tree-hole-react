@@ -27,6 +27,7 @@ specifiers:
   eslint: ^8.10.0
   eslint-plugin-promise: ^6.0.0
   eslint-plugin-react-hooks: ^4.3.0
+  framer-motion: ^6.2.8
   good-storage: ^1.1.1
   lodash: ^4.17.21
   mobx-react: ^7.3.0
@@ -59,6 +60,7 @@ dependencies:
   '@mui/icons-material': registry.npmmirror.com/@mui/icons-material/5.5.0_e26da9a06063015d999cdabd2929947d
   '@mui/material': registry.npmmirror.com/@mui/material/5.5.0_cc046292e2a161659fc089df7011b5cc
   axios: registry.npmmirror.com/axios/0.26.1
+  framer-motion: registry.npmmirror.com/framer-motion/6.2.8_react-dom@17.0.2+react@17.0.2
   good-storage: registry.npmmirror.com/good-storage/1.1.1
   lodash: registry.npmmirror.com/lodash/4.17.21
   mobx-react: registry.npmmirror.com/mobx-react/7.3.0_react-dom@17.0.2+react@17.0.2
@@ -678,6 +680,16 @@ packages:
     version: 0.8.0
     dev: false
 
+  registry.npmmirror.com/@emotion/is-prop-valid/0.8.8:
+    resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz}
+    name: '@emotion/is-prop-valid'
+    version: 0.8.8
+    requiresBuild: true
+    dependencies:
+      '@emotion/memoize': registry.npmmirror.com/@emotion/memoize/0.7.4
+    dev: false
+    optional: true
+
   registry.npmmirror.com/@emotion/is-prop-valid/1.1.2:
     resolution: {integrity: sha512-3QnhqeL+WW88YjYbQL5gUIkthuMw7a0NGbZ7wfFVk2kg/CK5w8w5FFa0RzWjyY1+sujN0NWbtSHH6OJmWHtJpQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@emotion/is-prop-valid/-/is-prop-valid-1.1.2.tgz}
     name: '@emotion/is-prop-valid'
@@ -685,6 +697,13 @@ packages:
     dependencies:
       '@emotion/memoize': registry.npmmirror.com/@emotion/memoize/0.7.5
     dev: false
+
+  registry.npmmirror.com/@emotion/memoize/0.7.4:
+    resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@emotion/memoize/-/memoize-0.7.4.tgz}
+    name: '@emotion/memoize'
+    version: 0.7.4
+    dev: false
+    optional: true
 
   registry.npmmirror.com/@emotion/memoize/0.7.5:
     resolution: {integrity: sha512-igX9a37DR2ZPGYtV6suZ6whr8pTFtyHL3K/oLUotxpSVO2ASaprmAe2Dkq7tBo7CRY7MMDrAa9nuQP9/YG8FxQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@emotion/memoize/-/memoize-0.7.5.tgz}
@@ -3189,6 +3208,34 @@ packages:
     version: 4.2.0
     dev: true
 
+  registry.npmmirror.com/framer-motion/6.2.8_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-4PtBWFJ6NqR350zYVt9AsFDtISTqsdqna79FvSYPfYDXuuqFmiKtZdkTnYPslnsOMedTW0pEvaQ7eqjD+sA+HA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/framer-motion/-/framer-motion-6.2.8.tgz}
+    id: registry.npmmirror.com/framer-motion/6.2.8
+    name: framer-motion
+    version: 6.2.8
+    peerDependencies:
+      react: '>=16.8 || ^17.0.0 || ^18.0.0'
+      react-dom: '>=16.8 || ^17.0.0 || ^18.0.0'
+    dependencies:
+      framesync: registry.npmmirror.com/framesync/6.0.1
+      hey-listen: registry.npmmirror.com/hey-listen/1.0.8
+      popmotion: registry.npmmirror.com/popmotion/11.0.3
+      react: registry.npmmirror.com/react/17.0.2
+      react-dom: registry.npmmirror.com/react-dom/17.0.2_react@17.0.2
+      style-value-types: registry.npmmirror.com/style-value-types/5.0.0
+      tslib: registry.npmmirror.com/tslib/2.3.1
+    optionalDependencies:
+      '@emotion/is-prop-valid': registry.npmmirror.com/@emotion/is-prop-valid/0.8.8
+    dev: false
+
+  registry.npmmirror.com/framesync/6.0.1:
+    resolution: {integrity: sha512-fUY88kXvGiIItgNC7wcTOl0SNRCVXMKSWW2Yzfmn7EKNc+MpCzcz9DhdHcdjbrtN3c6R4H5dTY2jiCpPdysEjA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/framesync/-/framesync-6.0.1.tgz}
+    name: framesync
+    version: 6.0.1
+    dependencies:
+      tslib: registry.npmmirror.com/tslib/2.3.1
+    dev: false
+
   registry.npmmirror.com/fs-extra/8.1.0:
     resolution: {integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fs-extra/-/fs-extra-8.1.0.tgz}
     name: fs-extra
@@ -3422,6 +3469,12 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: registry.npmmirror.com/function-bind/1.1.1
+
+  registry.npmmirror.com/hey-listen/1.0.8:
+    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/hey-listen/-/hey-listen-1.0.8.tgz}
+    name: hey-listen
+    version: 1.0.8
+    dev: false
 
   registry.npmmirror.com/history/5.3.0:
     resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/history/-/history-5.3.0.tgz}
@@ -4387,6 +4440,17 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  registry.npmmirror.com/popmotion/11.0.3:
+    resolution: {integrity: sha512-Y55FLdj3UxkR7Vl3s7Qr4e9m0onSnP8W7d/xQLsoJM40vs6UKHFdygs6SWryasTZYqugMjm3BepCF4CWXDiHgA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/popmotion/-/popmotion-11.0.3.tgz}
+    name: popmotion
+    version: 11.0.3
+    dependencies:
+      framesync: registry.npmmirror.com/framesync/6.0.1
+      hey-listen: registry.npmmirror.com/hey-listen/1.0.8
+      style-value-types: registry.npmmirror.com/style-value-types/5.0.0
+      tslib: registry.npmmirror.com/tslib/2.3.1
+    dev: false
+
   registry.npmmirror.com/postcss-js/4.0.0_postcss@8.4.8:
     resolution: {integrity: sha512-77QESFBwgX4irogGVPgQ5s07vLvFqWr228qZY+w6lW599cRlK/HmnlivnnVUxkjHnCu4J16PDMHcH+e+2HbvTQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/postcss-js/-/postcss-js-4.0.0.tgz}
     id: registry.npmmirror.com/postcss-js/4.0.0
@@ -5060,6 +5124,15 @@ packages:
     version: 3.1.1
     engines: {node: '>=8'}
     dev: true
+
+  registry.npmmirror.com/style-value-types/5.0.0:
+    resolution: {integrity: sha512-08yq36Ikn4kx4YU6RD7jWEv27v4V+PUsOGa4n/as8Et3CuODMJQ00ENeAVXAeydX4Z2j1XHZF1K2sX4mGl18fA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/style-value-types/-/style-value-types-5.0.0.tgz}
+    name: style-value-types
+    version: 5.0.0
+    dependencies:
+      hey-listen: registry.npmmirror.com/hey-listen/1.0.8
+      tslib: registry.npmmirror.com/tslib/2.3.1
+    dev: false
 
   registry.npmmirror.com/stylis/4.0.13:
     resolution: {integrity: sha512-xGPXiFVl4YED9Jh7Euv2V220mriG9u4B2TA6Ybjc1catrstKD2PpIdU3U0RKpkVBC2EhmL/F0sPCr9vrFTNRag==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/stylis/-/stylis-4.0.13.tgz}
