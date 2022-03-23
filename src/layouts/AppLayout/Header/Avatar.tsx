@@ -23,11 +23,9 @@ function UserAvatarMenu() {
     <HeaderList>
       {
         userAvatarConfig.map((item) => {
-          return <>
-            <HeaderListItem key={item}>
-              <ListItemText>{item}</ListItemText>
-            </HeaderListItem>
-          </>
+          return <HeaderListItem key={item}>
+            <ListItemText>{item}</ListItemText>
+          </HeaderListItem>
         })
       }
     </HeaderList>
