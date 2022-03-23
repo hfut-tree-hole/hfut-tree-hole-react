@@ -1,10 +1,10 @@
-// @mui
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import type { Breakpoint } from '@mui/system/createTheme/createBreakpoints'
 
-// ----------------------------------------------------------------------
+type Query = 'up' | 'down' | 'between' | 'only'
 
-export default function useResponsive(query, key, start, end) {
+export default function useResponsive(query: Query, key: Breakpoint, start = 0, end = 0) {
   const theme = useTheme()
 
   const mediaUp = useMediaQuery(theme.breakpoints.up(key))
