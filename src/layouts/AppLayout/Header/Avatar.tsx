@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, List, ListItemButton, ListItemText, Typography } from '@mui/material'
+import { Avatar, Box, Divider, ListItemText, Typography } from '@mui/material'
 import { HeaderList, HeaderListItem } from './styles'
 import { useAuth } from '@/hooks/use-auth'
 import { HeaderPopover } from '@/layouts/AppLayout/Header/HeaderPopover'
