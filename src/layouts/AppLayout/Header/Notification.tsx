@@ -22,7 +22,7 @@ import { ClearAll } from '@/assets/svg/icon/clearAll'
 import { Scrollbar } from '@/components/base/Scrollbar/Scrollbar'
 import { BaseIcon } from '@/components/base/BaseIcon/BaseIcon'
 import type { NotificationsDto } from '@/shared/Dto/notifications.dto'
-import { transformTime } from '@/shared/utils/utils'
+import { transformBeforeTime } from '@/shared/utils/utils'
 
 function NotificationItem({ item }: { item: NotificationsDto }) {
   return (
@@ -49,7 +49,7 @@ function NotificationItem({ item }: { item: NotificationsDto }) {
             }}
           >
             <BaseIcon icon="eva:clock-outline" sx={{ mr: 0.5, width: 16, height: 16 }} />
-            {transformTime(item.notifyTime)} 分钟之前
+            {transformBeforeTime(item.notifyTime)} 分钟之前
           </Typography>
         }
       />
