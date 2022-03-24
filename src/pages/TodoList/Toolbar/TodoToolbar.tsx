@@ -1,9 +1,13 @@
 import { styled } from '@mui/material/styles'
 import { Button, IconButton, Stack, ToggleButton, Tooltip, Typography } from '@mui/material'
 
+import type { RefObject } from 'react'
+import { useCallback, useState } from 'react'
+import type FullCalendar from '@fullcalendar/react'
 import useResponsive from '@/hooks/use-response'
 
 import { BaseIcon } from '@/components/base/BaseIcon/BaseIcon'
+import { transformCalendarTime } from '@/shared/utils/utils'
 
 const VIEW_OPTIONS = [
   { value: 'dayGridMonth', label: 'Month', icon: 'ic:round-view-module' },
@@ -23,8 +27,20 @@ const RootStyle = styled('div')(({ theme }) => ({
   },
 }))
 
-export function TodoToolbar({ date, view, onToday, onNextDate, onPrevDate, onChangeView }) {
+export function TodoToolbar({ calendarEl, date }: { calendarEl: RefObject<FullCalendar>; date: Date }) {
   const isDesktop = useResponsive('up', 'sm')
+
+  const [view, setView] = useState()
+
+  const onChangeView = useCallback(() => {}, [])
+
+  const onNextDate = useCallback(() => {
+    console.log(calendarEl.current?.getApi().next())
+  }, [])
+
+  const onPrevDate = useCallback(() => {}, [])
+
+  const onToday = useCallback(() => {}, [])
 
   return (
     <RootStyle>
@@ -53,7 +69,7 @@ export function TodoToolbar({ date, view, onToday, onNextDate, onPrevDate, onCha
           }} />
         </IconButton>
 
-        <Typography variant="h5">{date}</Typography>
+        <Typography variant="h5">{transformCalendarTime(date)}</Typography>
 
         <IconButton onClick={onNextDate}>
           <BaseIcon icon="eva:arrow-ios-forward-fill" sx={{
@@ -65,7 +81,7 @@ export function TodoToolbar({ date, view, onToday, onNextDate, onPrevDate, onCha
 
       {isDesktop && (
         <Button size="small" color="error" variant="contained" onClick={onToday}>
-          Today
+          今天
         </Button>
       )}
     </RootStyle>

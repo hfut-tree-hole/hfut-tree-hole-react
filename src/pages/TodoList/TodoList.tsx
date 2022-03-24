@@ -6,18 +6,21 @@ import timelinePlugin from '@fullcalendar/timeline'
 import interactionPlugin from '@fullcalendar/interaction'
 import '@fullcalendar/react/dist/vdom'
 import { useCallback, useRef, useState } from 'react'
+import { Card } from '@mui/material'
 import CalendarStyle from '@/pages/TodoList/CalendarStyle'
 import { TodoToolbar } from '@/pages/TodoList/Toolbar/TodoToolbar'
 import { TodoConfirm } from '@/pages/TodoList/TodoConfirm/TodoConfirm'
 import { DialogAnimate } from '@/components/Animate/DialogAnimate/DialogAnimate'
 import useResponsive from '@/hooks/use-response'
+import { useToolbar } from '@/pages/TodoList/use-toolbar'
 
 console.log(1)
 export function TodoList() {
-  const calendarRef = useRef(null)
+  const calendarRef = useRef<FullCalendar>(null)
   const [open, setOpen] = useState(false)
 
   const isDesktop = useResponsive('up', 'sm')
+
   const [date, setDate] = useState(new Date())
 
   const [events, setEvents] = useState([
@@ -41,31 +44,33 @@ export function TodoList() {
   }, [])
 
   return <>
-    <CalendarStyle>
-      <TodoToolbar date={undefined} view={undefined} onToday={undefined} onNextDate={undefined} onPrevDate={undefined} onChangeView={undefined} />
-      <FullCalendar
-        weekends
-        editable
-        droppable
-        selectable
-        events={events}
-        ref={calendarRef}
-        rerenderDelay={10}
-        initialDate={date}
-        initialView={'dayGridMonth'}
-        dayMaxEventRows={3}
-        eventDisplay="block"
-        headerToolbar={false}
-        allDayMaintainDuration
-        eventResizableFromStart
-        select={handleSelectRange}
-        eventDrop={handleDropEvent}
-        eventClick={handleSelectEvent}
-        eventResize={handleResizeEvent}
-        height={isDesktop ? 720 : 'auto'}
-        plugins={[listPlugin, dayGridPlugin, timelinePlugin, timeGridPlugin, interactionPlugin]}
-      />
-    </CalendarStyle>
+    <Card>
+      <CalendarStyle>
+        <TodoToolbar calendarEl={calendarRef} date={date}/>
+        <FullCalendar
+          weekends
+          editable
+          droppable
+          selectable
+          events={events}
+          ref={calendarRef}
+          rerenderDelay={10}
+          initialDate={date}
+          initialView={'dayGridMonth'}
+          dayMaxEventRows={3}
+          eventDisplay="block"
+          headerToolbar={false}
+          allDayMaintainDuration
+          eventResizableFromStart
+          select={handleSelectRange}
+          eventDrop={handleDropEvent}
+          eventClick={handleSelectEvent}
+          eventResize={handleResizeEvent}
+          height={isDesktop ? 720 : 'auto'}
+          plugins={[listPlugin, dayGridPlugin, timelinePlugin, timeGridPlugin, interactionPlugin]}
+        />
+      </CalendarStyle>
+    </Card>
 
     <DialogAnimate open={open} onClose={onDialogAnimateClose}>
       <TodoConfirm />
