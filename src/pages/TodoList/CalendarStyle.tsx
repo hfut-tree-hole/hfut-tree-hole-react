@@ -1,5 +1,4 @@
 import { alpha, styled } from '@mui/material/styles'
-import type { CustomThemeOptions } from '@/theme/overrides'
 
 const CalendarStyle = styled('div')(({ theme }) => ({
   'width': 'calc(100% + 2px)',

@@ -1,20 +1,21 @@
 import { useMemo, useState } from 'react'
 import type { DrawerProps } from '@mui/material/Drawer'
-import { useWindowSize } from '@/hooks/use-window-size'
+import useResponsive from '../../hooks/use-response'
 
 export function useDrawer() {
   const [open, setOpen] = useState(true)
 
-  const { isSm } = useWindowSize()
+  const isDesktop = useResponsive('up', 'sm')
 
   const variant = useMemo((): DrawerProps['variant'] => {
-    if (isSm) {
+    if (!isDesktop) {
       setOpen(false)
       return 'temporary'
     } else {
+      setOpen(true)
       return 'persistent'
     }
-  }, [])
+  }, [isDesktop])
 
   const handleDrawerOpen = () => {
     setOpen(true)

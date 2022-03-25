@@ -11,7 +11,7 @@ const colors = [
   palette.error.darker,
 ]
 
-export function TodoConfirm() {
+export function TodoForm() {
   return <>
     <ColorPicker colors={colors} />
   </>
