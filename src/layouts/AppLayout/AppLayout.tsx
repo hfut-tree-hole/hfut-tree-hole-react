@@ -6,19 +6,19 @@ import { AppLayoutConfig } from '../../shared/config/layout'
 import { Footer } from '@/components/Footer'
 import { useDrawer } from '@/layouts/AppLayout/use-drawer'
 import { AppHeader } from '@/layouts/AppLayout/Header/Header'
-import { Drawer, drawerWidth } from '@/layouts/AppLayout/Drawer/Drawer'
+import { Drawer } from '@/layouts/AppLayout/Drawer/Drawer'
 
 const RouterView = styled(Box)<BoxProps>(({ theme }) => ({
   maxWidth: '100vw',
   position: 'relative',
-  paddingLeft: 16,
-  paddingRight: 16,
-  marginLeft: AppLayoutConfig.DRAWER.DASHBOARD_COLLAPSE_WIDTH,
+  paddingLeft: 24,
+  paddingRight: 24,
+  marginLeft: 0,
   paddingTop: AppLayoutConfig.HEADER.DASHBOARD_DESKTOP_HEIGHT + 24,
   paddingBottom: AppLayoutConfig.HEADER.DASHBOARD_DESKTOP_HEIGHT + 24,
   [theme.breakpoints.up('sm')]: {
-    marginLeft: `${drawerWidth}px`,
-    maxWidth: `calc(100vw - ${drawerWidth})px`,
+    marginLeft: `${AppLayoutConfig.DRAWER.DASHBOARD_WIDTH + 20}px`,
+    maxWidth: `calc(100vw - ${AppLayoutConfig.DRAWER.DASHBOARD_WIDTH})px`,
     paddingTop: AppLayoutConfig.HEADER.MOBILE_HEIGHT + 24,
     paddingBottom: AppLayoutConfig.HEADER.MOBILE_HEIGHT + 24,
   },
