@@ -3,8 +3,13 @@ import type { SxProps } from '@mui/material'
 import { Box } from '@mui/material'
 import type { BoxProps } from '@mui/material/Box/Box'
 
-export function BaseIcon({ icon, sx, ...boxProps }: { icon: string; sx: SxProps; boxProps?: BoxProps }) {
+interface BaseIconProps extends BoxProps {
+  icon: string
+  sx: SxProps
+}
+
+export function BaseIcon(props: BaseIconProps) {
   return <>
-    <Box component={Icon} icon={icon} sx={sx} {...(boxProps || {})}/>
+    <Box component={Icon} {...props} />
   </>
 }
