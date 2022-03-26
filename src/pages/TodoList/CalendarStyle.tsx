@@ -11,7 +11,7 @@ const CalendarStyle = styled('div')(({ theme }) => ({
     '--fc-now-indicator-color': theme.palette.error.main,
     '--fc-today-bg-color': theme.palette.action.selected,
     '--fc-page-bg-color': theme.palette.background.default,
-    '--fc-neutral-bg-color': theme.palette.background.neutral,
+    '--fc-neutral-bg-color': (theme as any).palette.background.neutral,
     '--fc-list-event-hover-bg-color': theme.palette.action.hover,
     '--fc-highlight-color': alpha(theme.palette.primary.main, 0.08),
   },
@@ -81,14 +81,14 @@ const CalendarStyle = styled('div')(({ theme }) => ({
   '& .fc .fc-popover': {
     border: 0,
     overflow: 'hidden',
-    boxShadow: theme.customShadows.z20,
+    boxShadow: (theme as any).customShadows.z20,
     borderRadius: theme.shape.borderRadius,
     backgroundColor: theme.palette.background.paper,
   },
   '& .fc .fc-popover-header': {
     ...theme.typography.subtitle2,
     padding: theme.spacing(1),
-    backgroundColor: theme.palette.grey[500_12],
+    backgroundColor: (theme as any).palette.grey[500_12],
     borderBottom: `solid 1px ${theme.palette.divider}`,
   },
   '& .fc .fc-popover-close': {
