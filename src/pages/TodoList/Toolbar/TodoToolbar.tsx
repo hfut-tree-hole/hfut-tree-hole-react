@@ -1,7 +1,6 @@
 import { styled } from '@mui/material/styles'
 import { Button, IconButton, Stack, ToggleButton, Tooltip, Typography } from '@mui/material'
 import useResponsive from '@/hooks/use-response'
-
 import { BaseIcon } from '@/components/base/BaseIcon/BaseIcon'
 import { transformCalendarTime } from '@/shared/utils/utils'
 import type { Fn } from '@/shared/types'
@@ -24,7 +23,16 @@ const RootStyle = styled('div')(({ theme }) => ({
   },
 }))
 
-export function TodoToolbar({ date, view, onToday, onNextDate, onPrevDate, onChangeView }: { date: Date; view: string; onToday: Fn; onNextDate: Fn; onPrevDate: Fn; onChangeView: Fn }) {
+interface Props {
+  date: Date
+  view: string
+  onToday: Fn
+  onNextDate: Fn
+  onPrevDate: Fn
+  onChangeView: Fn
+}
+
+export function TodoToolbar({ date, view, onToday, onNextDate, onPrevDate, onChangeView }: Props) {
   const isDesktop = useResponsive('up', 'sm')
 
   return (
@@ -39,7 +47,7 @@ export function TodoToolbar({ date, view, onToday, onNextDate, onPrevDate, onCha
                 onChange={() => onChangeView(viewOption.value)}
                 sx={{ width: 32, height: 32, padding: 0, border: 0 }}
               >
-                <BaseIcon icon={viewOption.icon} width={20} height={20} />
+                <BaseIcon icon={viewOption.icon} width={20} height={20}/>
               </ToggleButton>
             </Tooltip>
           ))}
@@ -48,19 +56,13 @@ export function TodoToolbar({ date, view, onToday, onNextDate, onPrevDate, onCha
 
       <Stack direction="row" alignItems="center" spacing={2}>
         <IconButton onClick={onPrevDate}>
-          <BaseIcon icon="eva:arrow-ios-back-fill" sx={{
-            width: 20,
-            height: 20,
-          }} />
+          <BaseIcon icon="eva:arrow-ios-back-fill" width={20} height={20} />
         </IconButton>
 
         <Typography variant="h5">{transformCalendarTime(date)}</Typography>
 
         <IconButton onClick={onNextDate}>
-          <BaseIcon icon="eva:arrow-ios-forward-fill" sx={{
-            width: 20,
-            height: 20,
-          }} />
+          <BaseIcon icon="eva:arrow-ios-forward-fill" width={20} height={20} />
         </IconButton>
       </Stack>
 

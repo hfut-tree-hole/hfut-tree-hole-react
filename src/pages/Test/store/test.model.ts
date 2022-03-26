@@ -3,7 +3,7 @@ import { createModel } from 'hox'
 
 function useTest() {
   const [todo, setTodo] = useState<any[]>([])
-  const addTodo = (list: string) => setTodo(prev => prev.concat(list))
+  const addTodo = (list: any) => setTodo(prev => prev.concat(list))
 
   return {
     todo,
