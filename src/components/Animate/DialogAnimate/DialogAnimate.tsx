@@ -1,9 +1,21 @@
 import { AnimatePresence, m } from 'framer-motion'
+import type { DialogProps, SxProps } from '@mui/material'
 import { Box, Dialog, Paper } from '@mui/material'
 
+import type { ReactNode } from 'react'
 import { varFade } from '../variants/index'
+import type { Fn } from '@/shared/types'
 
-export function DialogAnimate({ open = false, variants, onClose, children, sx, ...other }) {
+interface Props {
+  open: boolean
+  onClose: Fn
+  children: ReactNode
+  sx?: SxProps
+  variants?: string
+  other?: DialogProps
+}
+
+export function DialogAnimate({ open = false, variants, onClose, children, sx, ...other }: Props) {
   return (
     <AnimatePresence>
       {open && (
