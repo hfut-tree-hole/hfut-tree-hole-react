@@ -1,14 +1,30 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type FullCalendar from '@fullcalendar/react'
+import useTodoModel from '@/pages/TodoList/store/todo.model'
 
-export function useToolbar() {
+export type CalendarView = 'dayGridMonth' | 'listWeek' | 'timeGridDay' | 'timeGridWeek'
+
+export function useToolbar(isDesktop: boolean | null) {
+  const store = useTodoModel()
   const [date, setDate] = useState(new Date())
 
   const calendarRef = useRef<FullCalendar>(null)
 
-  const handleChangeView = useCallback(() => {
-
+  const [view, setView] = useState<CalendarView>(isDesktop ? 'dayGridMonth' : 'listWeek')
+  const handleChangeView = useCallback((payload: CalendarView) => {
+    setView(payload)
+    calendarRef.current?.getApi().changeView(payload)
   }, [])
+
+  useEffect(() => {
+    const el = calendarRef.current?.getApi()
+    if (el) {
+      const newView = isDesktop ? 'dayGridMonth' : 'listWeek'
+      el.changeView(newView)
+      store.setRootEl(calendarRef.current!)
+      setView(newView)
+    }
+  }, [isDesktop])
 
   const handleNextDate = useCallback(() => {
     const el = calendarRef.current?.getApi()
@@ -39,5 +55,6 @@ export function useToolbar() {
     handlePrevDate,
     handleOnToday,
     calendarRef,
+    view,
   }
 }

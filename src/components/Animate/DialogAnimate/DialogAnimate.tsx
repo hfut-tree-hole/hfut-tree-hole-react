@@ -1,9 +1,7 @@
 import { AnimatePresence, m } from 'framer-motion'
 import type { DialogProps, SxProps } from '@mui/material'
 import { Box, Dialog, Paper } from '@mui/material'
-
 import type { ReactNode } from 'react'
-import { varFade } from '../variants/index'
 import type { Fn } from '@/shared/types'
 
 interface Props {
@@ -15,7 +13,7 @@ interface Props {
   other?: DialogProps
 }
 
-export function DialogAnimate({ open = false, variants, onClose, children, sx, ...other }: Props) {
+export function DialogAnimate({ open, variants, onClose, children, sx, ...other }: Props) {
   return (
     <AnimatePresence>
       {open && (
@@ -27,13 +25,6 @@ export function DialogAnimate({ open = false, variants, onClose, children, sx, .
           PaperComponent={props => (
             <Box
               component={m.div}
-              {...(variants
-                || varFade({
-                  distance: 120,
-                  durationIn: 0.32,
-                  durationOut: 0.24,
-                  easeIn: 'easeInOut',
-                }).inUp)}
               sx={{
                 width: '100%',
                 height: '100%',

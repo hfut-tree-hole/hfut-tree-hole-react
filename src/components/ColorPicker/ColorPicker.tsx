@@ -1,10 +1,22 @@
+import type { SxProps } from '@mui/material'
 import { Box, Radio, RadioGroup } from '@mui/material'
+import type { ChangeEvent } from 'react'
+import { useCallback, useState } from 'react'
 import { BaseIcon } from '@/components/base/BaseIcon/BaseIcon'
 import type { CustomThemeOptions } from '@/theme/overrides'
+import type { Fn } from '@/shared/types'
 
-export function ColorPicker({ colors, ...other }: { colors: string[] }) {
+export function ColorPicker({ colors, onChange }: { colors: string[]; onChange: Fn }) {
+  const [val, setVal] = useState(colors[0])
+
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const newColor = e.target.value
+    setVal(newColor)
+    onChange(newColor)
+  }, [])
+
   return (
-    <RadioGroup row {...other}>
+    <RadioGroup row value={val} onChange={handleChange}>
       {colors.map((color) => {
         const isWhite = color === '#FFFFFF' || color === 'white'
 
@@ -55,7 +67,7 @@ export function ColorPicker({ colors, ...other }: { colors: string[] }) {
   )
 }
 
-function IconColor({ sx }) {
+function IconColor({ sx }: { sx: SxProps }) {
   return (
     <Box
       sx={{

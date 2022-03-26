@@ -4,6 +4,7 @@ import useResponsive from '@/hooks/use-response'
 import { BaseIcon } from '@/components/base/BaseIcon/BaseIcon'
 import { transformCalendarTime } from '@/shared/utils/utils'
 import type { Fn } from '@/shared/types'
+import type { CalendarView } from '@/pages/TodoList/use-toolbar'
 
 const VIEW_OPTIONS = [
   { value: 'dayGridMonth', label: 'Month', icon: 'ic:round-view-module' },
@@ -25,7 +26,7 @@ const RootStyle = styled('div')(({ theme }) => ({
 
 interface Props {
   date: Date
-  view: string
+  view: CalendarView
   onToday: Fn
   onNextDate: Fn
   onPrevDate: Fn
@@ -64,13 +65,15 @@ export function TodoToolbar({ date, view, onToday, onNextDate, onPrevDate, onCha
         <IconButton onClick={onNextDate}>
           <BaseIcon icon="eva:arrow-ios-forward-fill" width={20} height={20} />
         </IconButton>
+
       </Stack>
 
       {isDesktop && (
         <Button size="small" color="error" variant="contained" onClick={onToday}>
-          今天
+          跳转
         </Button>
-      )}
+      )
+      }
     </RootStyle>
   )
 }

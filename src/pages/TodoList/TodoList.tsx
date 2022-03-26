@@ -1,3 +1,4 @@
+import type { DateSelectArg, EventClickArg } from '@fullcalendar/react'
 import FullCalendar from '@fullcalendar/react'
 import listPlugin from '@fullcalendar/list'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -5,26 +6,27 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import timelinePlugin from '@fullcalendar/timeline'
 import interactionPlugin from '@fullcalendar/interaction'
 import '@fullcalendar/react/dist/vdom'
-import { useCallback, useEffect, useState } from 'react'
-import { Card } from '@mui/material'
-import { observer } from 'mobx-react'
+import { useCallback, useState } from 'react'
+import { Box, Button, Card, DialogTitle, List, ListItem, ListItemText } from '@mui/material'
+import type { EventInput } from '@fullcalendar/common'
+import useTodoModel from './store/todo.model'
 import CalendarStyle from '@/pages/TodoList/CalendarStyle'
 import { TodoToolbar } from '@/pages/TodoList/Toolbar/TodoToolbar'
+import type { TodoFormProps } from '@/pages/TodoList/TodoForm/TodoForm'
 import { TodoForm } from '@/pages/TodoList/TodoForm/TodoForm'
 import { DialogAnimate } from '@/components/Animate/DialogAnimate/DialogAnimate'
 import useResponsive from '@/hooks/use-response'
 import { useToolbar } from '@/pages/TodoList/use-toolbar'
-
-export type CalendarView = 'dayGridMonth' | 'listWeek'
+import { BaseIcon } from '@/components/base/BaseIcon/BaseIcon'
 
 export const TodoList = () => {
   const isDesktop = useResponsive('up', 'sm')
 
-  const [view, setView] = useState<CalendarView>(isDesktop ? 'dayGridMonth' : 'listWeek')
-
-  const events = []
+  const store = useTodoModel()
 
   const [open, setOpen] = useState(false)
+  const [isSelectedEvent, setIsSelectedEvent] = useState(false)
+  const [formPayload, setFormPayload] = useState<EventInput>()
 
   const {
     date,
@@ -33,26 +35,31 @@ export const TodoList = () => {
     handlePrevDate,
     handleOnToday,
     calendarRef,
-  } = useToolbar()
-
-  useEffect(() => {
-    const el = calendarRef.current?.getApi()
-    if (el) {
-      const newView = isDesktop ? 'dayGridMonth' : 'listWeek'
-      el.changeView(newView)
-      setView(newView)
-    }
-  }, [isDesktop])
+    view,
+  } = useToolbar(isDesktop)
 
   const toggleOpenState = () => {
     setOpen(prev => !prev)
   }
 
-  const handleSelectRange = useCallback(() => {}, [])
-  const handleDropEvent = useCallback(() => {}, [])
-  const handleSelectEvent = useCallback(() => {
+  const handleAddEventClick = useCallback(() => toggleOpenState(), [])
+
+  const handleSelectRange = useCallback((payload: DateSelectArg) => {
+    setFormPayload({
+      start: payload.start,
+      end: payload.end,
+    })
     toggleOpenState()
   }, [])
+
+  const handleDropEvent = useCallback(() => {}, [])
+
+  const handleSelectEvent = useCallback((event: EventClickArg) => {
+    setIsSelectedEvent(true)
+    setFormPayload(event)
+    toggleOpenState()
+  }, [])
+
   const handleResizeEvent = useCallback(() => {
 
   }, [])
@@ -62,6 +69,13 @@ export const TodoList = () => {
   }, [])
 
   return <>
+    {!isDesktop && (
+      <Box className={'mb-5'}>
+        <Button variant="contained" startIcon={<BaseIcon icon={'carbon:add'} onClick={handleAddEventClick}/>}>
+          添加任务
+        </Button>
+      </Box>
+    )}
     <Card>
       <CalendarStyle>
         <TodoToolbar date={date} onChangeView={handleChangeView} onNextDate={handleNextDate} onPrevDate={handlePrevDate} onToday={handleOnToday} view={view}/>
@@ -70,12 +84,12 @@ export const TodoList = () => {
           editable
           droppable
           selectable
-          events={events}
+          events={store.events}
           ref={calendarRef}
           rerenderDelay={10}
           initialDate={date}
           initialView={view}
-          dayMaxEventRows={3}
+          dayMaxEventRows={5}
           eventDisplay="block"
           headerToolbar={false}
           allDayMaintainDuration
@@ -90,8 +104,23 @@ export const TodoList = () => {
       </CalendarStyle>
     </Card>
 
-    <DialogAnimate open={open} onClose={onDialogAnimateClose}>
-      <TodoForm />
-    </DialogAnimate>
+    <List>
+      {
+        store.events.map(item => <ListItem key={item.title}>
+          <ListItemText>{item.title}</ListItemText>
+        </ListItem>)
+      }
+    </List>
+
+    {
+      open
+        ? <DialogAnimate open={open} onClose={onDialogAnimateClose} sx={{
+          opacity: 1,
+        }}>
+          <DialogTitle>{isSelectedEvent ? '编辑任务' : '新增任务'}</DialogTitle>
+          <TodoForm isSelected={isSelectedEvent} payload={formPayload}/>
+        </DialogAnimate>
+        : <></>
+    }
   </>
 }

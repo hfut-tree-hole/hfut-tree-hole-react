@@ -4,6 +4,7 @@ import { Login } from '@/pages/Login'
 import { Home } from '@/pages/Home/Home'
 import { Blog } from '@/pages/Blog/Blog'
 import { TodoList } from '@/pages/TodoList/TodoList'
+import { Test } from '@/pages/Test/Test'
 
 const routes: RouteObject[] = [
   {
@@ -25,6 +26,10 @@ const routes: RouteObject[] = [
   {
     path: '/todolist',
     element: <TodoList />,
+  },
+  {
+    path: '/test',
+    element: <Test />,
   },
 ]
 
