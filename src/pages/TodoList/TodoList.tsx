@@ -118,7 +118,7 @@ export const TodoList = () => {
           opacity: 1,
         }}>
           <DialogTitle>{isSelectedEvent ? '编辑任务' : '新增任务'}</DialogTitle>
-          <TodoForm isSelected={isSelectedEvent} payload={formPayload}/>
+          <TodoForm isSelected={isSelectedEvent} payload={formPayload} handleCancel={toggleOpenState}/>
         </DialogAnimate>
         : <></>
     }

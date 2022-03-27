@@ -7,10 +7,10 @@ import type { Fn } from '@/shared/types'
 import type { CalendarView } from '@/pages/TodoList/use-toolbar'
 
 const VIEW_OPTIONS = [
-  { value: 'dayGridMonth', label: 'Month', icon: 'ic:round-view-module' },
-  { value: 'timeGridWeek', label: 'Week', icon: 'ic:round-view-week' },
-  { value: 'timeGridDay', label: 'Day', icon: 'ic:round-view-day' },
-  { value: 'listWeek', label: 'Agenda', icon: 'ic:round-view-agenda' },
+  { value: 'dayGridMonth', label: '每月', icon: 'ic:round-view-module' },
+  { value: 'timeGridWeek', label: '每周', icon: 'ic:round-view-week' },
+  { value: 'timeGridDay', label: '每日', icon: 'ic:round-view-day' },
+  { value: 'listWeek', label: '议程', icon: 'ic:round-view-agenda' },
 ]
 
 const RootStyle = styled('div')(({ theme }) => ({
@@ -70,7 +70,7 @@ export function TodoToolbar({ date, view, onToday, onNextDate, onPrevDate, onCha
 
       {isDesktop && (
         <Button size="small" color="error" variant="contained" onClick={onToday}>
-          跳转
+          today
         </Button>
       )
       }

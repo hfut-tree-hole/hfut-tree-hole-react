@@ -11,6 +11,7 @@ import palette from '@/theme/theme-config/palette'
 import { BaseIcon } from '@/components/base/BaseIcon/BaseIcon'
 import { validateWithHelperText } from '@/shared/utils/utils'
 import useTodoModel from '@/pages/TodoList/store/todo.model'
+import type { Fn } from '@/shared/types'
 
 const colors = [
   palette.primary.main,
@@ -36,6 +37,8 @@ export interface TodoFormProps {
   * @default undefined
   */
   payload?: EventInput
+
+  handleCancel: Fn
 }
 
 type Inputs = {
@@ -43,9 +46,10 @@ type Inputs = {
   desc: string
   startTime: Date
   endTime: Date
+
 }
 
-export function TodoForm({ isSelected = false, payload }: TodoFormProps) {
+export function TodoForm({ isSelected = false, payload, handleCancel }: TodoFormProps) {
   const { register, handleSubmit, control, getValues, formState: { errors } } = useForm<Inputs>({
     mode: 'onChange',
   })
@@ -60,17 +64,16 @@ export function TodoForm({ isSelected = false, payload }: TodoFormProps) {
   const [curColor, setCurColor] = useState<string>(colors[0])
   const onColorChange = useCallback((color: string) => setCurColor(color), [])
 
-  const onCancel = useCallback(() => {}, [])
+  const onCancel = useCallback(() => handleCancel(), [])
 
   const addEvent = (data: Inputs) => {
     store.addEvents({ title: data.title, start: new Date(data.startTime), end: new Date(data.endTime), textColor: curColor })
+    onCancel()
   }
 
   const onSubmit: SubmitHandler<Inputs> = data => addEvent(data)
 
-  const onError: SubmitErrorHandler<Inputs> = (err) => {
-
-  }
+  const onError: SubmitErrorHandler<Inputs> = () => {}
 
   return <>
     <form onSubmit={handleSubmit(onSubmit, onError)}>
