@@ -7,7 +7,6 @@ import type { IDrawerSideConfig } from '@/layouts/AppLayout/Drawer/Drawer'
 export function DrawerList({ list }: { list: IDrawerSideConfig[] }) {
   const theme = useTheme()
   const { pathname } = useLocation()
-  console.log(pathname)
 
   const isActive = (path: string) => path === pathname
 
