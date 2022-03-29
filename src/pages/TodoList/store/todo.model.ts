@@ -5,8 +5,8 @@ import type { EventInput } from '@fullcalendar/common'
 
 export interface EventPayload extends EventInput {
   [key: string]: any
-  start: Date | number[]
-  end: Date | number[]
+  start: Date | number[] | number
+  end: Date | number[] | number
 }
 
 function useTodo() {
@@ -18,7 +18,7 @@ function useTodo() {
   }
 
   const addEvents = (event: EventPayload) => {
-    event = { ...event, id: `${event.startTime}-${event.endTime}` }
+    event = { ...event, id: `${event.start}-${event.end}-${event.title}` }
     if (getEvent(event)) {
       changeEvent(event)
       return

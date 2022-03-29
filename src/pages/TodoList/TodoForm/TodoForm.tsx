@@ -59,8 +59,8 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
 
   const [title, setTitle] = useState<string>(payload?.title || '')
   const [desc, setDesc] = useState<string>(payload?.extendedProps?.desc || '')
-  const [startDate, setStartDate] = useState<Date | number[]>((payload?.start) || new Date())
-  const [endDate, setEndDate] = useState<Date | number[]>((payload?.end) || new Date())
+  const [startDate, setStartDate] = useState<Date | number>((payload?.start as number) || new Date())
+  const [endDate, setEndDate] = useState<Date | number>((payload?.end as number) || new Date())
 
   const [curColor, setCurColor] = useState<string>(payload?.textColor || colors[0])
   const onColorChange = useCallback((color: string) => setCurColor(color), [])
@@ -70,8 +70,8 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
   const addEvent = (data: Inputs) => {
     store.addEvents({
       title: data.title,
-      start: new Date(data.startTime),
-      end: new Date(data.endTime),
+      start: new Date(data.startTime).getTime(),
+      end: new Date(data.endTime).getTime(),
       textColor: curColor,
       desc: data.desc,
     })
