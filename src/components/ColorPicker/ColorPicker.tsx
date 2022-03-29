@@ -6,8 +6,14 @@ import { BaseIcon } from '@/components/base/BaseIcon/BaseIcon'
 import type { CustomThemeOptions } from '@/theme/overrides'
 import type { Fn } from '@/shared/types'
 
-export function ColorPicker({ colors, onChange }: { colors: string[]; onChange: Fn }) {
-  const [val, setVal] = useState(colors[0])
+interface ColorPickerProps {
+  colors: string[]
+  onChange: Fn
+  activeColor?: string
+}
+
+export function ColorPicker({ colors, onChange, activeColor }: ColorPickerProps) {
+  const [val, setVal] = useState(activeColor || colors[0])
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const newColor = e.target.value
