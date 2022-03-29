@@ -7,12 +7,11 @@ import timelinePlugin from '@fullcalendar/timeline'
 import interactionPlugin from '@fullcalendar/interaction'
 import '@fullcalendar/react/dist/vdom'
 import { useCallback, useState } from 'react'
-import { Box, Button, Card, DialogTitle, List, ListItem, ListItemText } from '@mui/material'
-import type { EventInput } from '@fullcalendar/common'
+import { Box, Button, Card, DialogTitle } from '@mui/material'
+import type { EventPayload } from './store/todo.model'
 import useTodoModel from './store/todo.model'
 import CalendarStyle from '@/pages/TodoList/CalendarStyle'
 import { TodoToolbar } from '@/pages/TodoList/Toolbar/TodoToolbar'
-import type { TodoFormProps } from '@/pages/TodoList/TodoForm/TodoForm'
 import { TodoForm } from '@/pages/TodoList/TodoForm/TodoForm'
 import { DialogAnimate } from '@/components/Animate/DialogAnimate/DialogAnimate'
 import useResponsive from '@/hooks/use-response'
@@ -26,7 +25,7 @@ export const TodoList = () => {
 
   const [open, setOpen] = useState(false)
   const [isSelectedEvent, setIsSelectedEvent] = useState(false)
-  const [formPayload, setFormPayload] = useState<EventInput>()
+  const [formPayload, setFormPayload] = useState<EventPayload>()
 
   const {
     date,
@@ -46,9 +45,9 @@ export const TodoList = () => {
 
   const handleSelectRange = useCallback((payload: DateSelectArg) => {
     setFormPayload({
-      start: payload.start,
+      start: payload.start as Date,
       end: payload.end,
-    })
+    } as any)
     toggleOpenState()
   }, [])
 
@@ -56,7 +55,7 @@ export const TodoList = () => {
 
   const handleSelectEvent = useCallback((event: EventClickArg) => {
     setIsSelectedEvent(true)
-    setFormPayload(event)
+    setFormPayload(event.event as any)
     toggleOpenState()
   }, [])
 
@@ -103,14 +102,6 @@ export const TodoList = () => {
         />
       </CalendarStyle>
     </Card>
-
-    <List>
-      {
-        store.events.map(item => <ListItem key={item.title}>
-          <ListItemText>{item.title}</ListItemText>
-        </ListItem>)
-      }
-    </List>
 
     {
       open

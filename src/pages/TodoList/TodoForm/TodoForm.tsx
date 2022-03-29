@@ -5,11 +5,11 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form'
 import { Controller, useForm } from 'react-hook-form'
 import { getTime } from 'date-fns'
-import type { EventInput } from '@fullcalendar/common'
 import { ColorPicker } from '@/components/ColorPicker/ColorPicker'
 import palette from '@/theme/theme-config/palette'
 import { BaseIcon } from '@/components/base/BaseIcon/BaseIcon'
 import { validateWithHelperText } from '@/shared/utils/utils'
+import type { EventPayload } from '@/pages/TodoList/store/todo.model'
 import useTodoModel from '@/pages/TodoList/store/todo.model'
 import type { Fn } from '@/shared/types'
 
@@ -36,7 +36,7 @@ export interface TodoFormProps {
   *
   * @default undefined
   */
-  payload?: EventInput
+  payload?: EventPayload
 
   handleCancel: Fn
 }
@@ -46,7 +46,6 @@ type Inputs = {
   desc: string
   startTime: Date
   endTime: Date
-
 }
 
 export function TodoForm({ isSelected = false, payload, handleCancel }: TodoFormProps) {
@@ -58,20 +57,30 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
 
   const handleDelete = useCallback(() => {}, [])
 
-  const [startDate, setStartDate] = useState((payload?.start) || new Date())
-  const [endDate, setEndDate] = useState((payload?.end) || new Date())
+  const [title, setTitle] = useState<string>(payload?.title || '')
+  const [desc, setDesc] = useState<string>(payload?.extendedProps?.desc || '')
+  const [startDate, setStartDate] = useState<Date | number[]>((payload?.start) || new Date())
+  const [endDate, setEndDate] = useState<Date | number[]>((payload?.end) || new Date())
 
-  const [curColor, setCurColor] = useState<string>(colors[0])
+  const [curColor, setCurColor] = useState<string>(payload?.textColor || colors[0])
   const onColorChange = useCallback((color: string) => setCurColor(color), [])
 
   const onCancel = useCallback(() => handleCancel(), [])
 
   const addEvent = (data: Inputs) => {
-    store.addEvents({ title: data.title, start: new Date(data.startTime), end: new Date(data.endTime), textColor: curColor })
+    store.addEvents({
+      title: data.title,
+      start: new Date(data.startTime),
+      end: new Date(data.endTime),
+      textColor: curColor,
+      desc: data.desc,
+    })
     onCancel()
   }
 
-  const onSubmit: SubmitHandler<Inputs> = data => addEvent(data)
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    addEvent(data)
+  }
 
   const onError: SubmitErrorHandler<Inputs> = () => {}
 
@@ -82,20 +91,24 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
 
           <TextField
             label={'标题'}
+            value={title}
             {...validateWithHelperText<Inputs>(errors, 'title', 'required', { error: true, helperText: '╮(๑•́ ₃•̀๑)╭ 你好像忘记填标题了' })}
             {...register('title', {
               required: true,
               maxLength: 20,
+              onChange: e => setTitle(e.target.value),
             })}/>
 
           <TextField
             label={'详细描述'}
+            value={desc}
             multiline
             rows={5}
             {...validateWithHelperText<Inputs>(errors, 'desc', 'required', { error: true, helperText: ' ◔ ‸◔？ 这里好像不能为空噢' })}
             {...register('desc', {
               required: true,
               maxLength: 100,
+              onChange: e => setDesc(e.target.value),
             })}
           />
 
@@ -109,7 +122,7 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
                   renderInput={params => <TextField {...params} {...register('startTime', {
                     required: true,
                   })} fullWidth />}
-                  onChange={date => setStartDate(date)}
+                  onChange={date => setStartDate(date!)}
                   date={startDate}
                   value={startDate}
                 />
@@ -121,7 +134,7 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
                 () => <MobileDateTimePicker
                   label="结束时间"
                   inputFormat="yyyy/MM/dd hh:mm a"
-                  onChange={date => setEndDate(date)}
+                  onChange={date => setEndDate(date!)}
                   renderInput={params => <TextField
                     {...params} {...register('endTime',
                       {
@@ -138,7 +151,7 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
               } />
           </LocalizationProvider>
 
-          <ColorPicker colors={colors} onChange={onColorChange}/>
+          <ColorPicker colors={colors} onChange={onColorChange} activeColor={payload?.textColor}/>
 
           <DialogActions style={{ padding: 0 }}>
             {
