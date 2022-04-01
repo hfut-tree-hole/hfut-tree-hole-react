@@ -27,12 +27,7 @@ function useTodo() {
   }
 
   const changeEvent = (event: EventPayload) => {
-    setEvents(prev => prev.map((item) => {
-      if (item.id === event.id) {
-        return event
-      }
-      return item
-    }))
+    setEvents(prev => prev.map(item => item.id === event.id ? event : item))
   }
 
   const getEvent = (event: EventPayload) => {
