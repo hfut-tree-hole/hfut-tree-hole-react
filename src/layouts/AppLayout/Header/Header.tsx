@@ -3,6 +3,10 @@ import IconButton from '@mui/material/IconButton'
 import type { AppBarProps } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import MuiAppBar from '@mui/material/AppBar'
+import { Box, Stack } from '@mui/material'
+import { UserAvatar } from './user-avatar'
+import { Notification } from './Notification'
+import { Friend } from './Friend'
 import { Searchbar } from '@/components/Searchbar'
 import { useWindowSize } from '@/hooks/use-window-size'
 import type { Fn } from '@/shared/types'
@@ -48,6 +52,13 @@ export function AppHeader(props: { open: boolean; handleDrawerOpen: Fn }) {
           </IconButton>
           : ''}
         <Searchbar />
+        <Box sx={{ flexGrow: 1 }} />
+
+        <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
+          <Notification />
+          <Friend />
+          <UserAvatar />
+        </Stack>
       </Toolbar>
     </Header>
   </>

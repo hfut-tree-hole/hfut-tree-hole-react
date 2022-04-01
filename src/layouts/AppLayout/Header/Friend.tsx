@@ -1,5 +1,4 @@
-import { Avatar, Box, List, ListItemAvatar, ListItemText, Typography } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import { Avatar, Box, ListItemAvatar, ListItemText, Typography } from '@mui/material'
 import { Scrollbar } from '../../../components/base/Scrollbar/Scrollbar'
 import { contactListData } from '../../../_mock_'
 import { HeaderList, HeaderListItem } from './styles'
