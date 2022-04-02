@@ -44,6 +44,7 @@ export const TodoList = () => {
   const handleAddEventClick = useCallback(() => toggleOpenState(), [])
 
   const handleSelectRange = useCallback((payload: DateSelectArg) => {
+    setIsSelectedEvent(false)
     setFormPayload({
       start: payload.start as Date,
       end: payload.end,
@@ -70,7 +71,7 @@ export const TodoList = () => {
   return <>
     {!isDesktop && (
       <Box className={'mb-5'}>
-        <Button variant="contained" startIcon={<BaseIcon icon={'carbon:add'} onClick={handleAddEventClick}/>}>
+        <Button variant="contained" onClick={handleAddEventClick} startIcon={<BaseIcon icon={'carbon:add'}/>}>
           添加任务
         </Button>
       </Box>

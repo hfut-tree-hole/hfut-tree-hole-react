@@ -55,8 +55,6 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
 
   const store = useTodoModel()
 
-  const handleDelete = useCallback(() => {}, [])
-
   const [title, setTitle] = useState<string>(payload?.title || '')
   const [desc, setDesc] = useState<string>(payload?.extendedProps?.desc || '')
   const [startDate, setStartDate] = useState<Date | number>((payload?.start as number) || new Date())
@@ -78,11 +76,18 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
     onCancel()
   }
 
+  const handleDelete = useCallback(() => {
+    store.deleteEvent(payload!)
+    onCancel()
+  }, [])
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     addEvent(data)
   }
 
-  const onError: SubmitErrorHandler<Inputs> = () => {}
+  const onError: SubmitErrorHandler<Inputs> = (err) => {
+    console.log(err)
+  }
 
   return <>
     <form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -92,10 +97,11 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
           <TextField
             label={'标题'}
             value={title}
-            {...validateWithHelperText<Inputs>(errors, 'title', 'required', { error: true, helperText: '╮(๑•́ ₃•̀๑)╭ 你好像忘记填标题了' })}
+
+            {...validateWithHelperText(errors?.title)}
             {...register('title', {
-              required: true,
-              maxLength: 20,
+              required: { value: true, message: '╮(๑•́ ₃•̀๑)╭ 你好像忘记填标题了' },
+              maxLength: { value: 20, message: ' (/= _ =)/~┴┴ 标题字符不能超过20' },
               onChange: e => setTitle(e.target.value),
             })}/>
 
@@ -104,10 +110,10 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
             value={desc}
             multiline
             rows={5}
-            {...validateWithHelperText<Inputs>(errors, 'desc', 'required', { error: true, helperText: ' ◔ ‸◔？ 这里好像不能为空噢' })}
+            {...validateWithHelperText(errors?.desc)}
             {...register('desc', {
-              required: true,
-              maxLength: 100,
+              required: { value: true, message: ' ◔ ‸◔？ 这里好像不能为空噢' },
+              maxLength: { value: 100, message: ' (/= _ =)/~┴┴ 描述字符不能超过20' },
               onChange: e => setDesc(e.target.value),
             })}
           />
@@ -142,7 +148,7 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
                         validate: () => getTime(new Date(getValues().endTime)) - getTime(new Date(getValues().startTime)) >= 0,
                       })}
                     fullWidth
-                    {...validateWithHelperText<Inputs>(errors, 'endTime', 'validate', { error: true, helperText: ' (/= _ =)/~┴┴ 结束时间怎么会小于开始时间嘛' })}
+                    {...validateWithHelperText(errors.endTime, ' (/= _ =)/~┴┴ 结束时间怎么可能小于开始时间')}
                   />}
                   date={endDate}
                   value={endDate}

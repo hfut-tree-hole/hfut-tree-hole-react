@@ -34,11 +34,20 @@ function useTodo() {
     return calendarEl?.getApi().getEventById(event.id || '')
   }
 
+  const deleteEvent = (event: EventPayload) => {
+    setEvents((prev) => {
+      const idx = prev.findIndex(item => item.id === event.id)
+
+      return prev.splice(idx + 1, prev.length)
+    })
+  }
+
   return {
     events,
     calendarEl,
     setRootEl,
     addEvents,
+    deleteEvent,
   }
 }
 
