@@ -9,7 +9,7 @@ export function transformCalendarTime(time: Date) {
 }
 
 export function validateWithHelperText(errorMsg?: FieldError, msg?: string) {
-  return errorMsg ? { error: true, helperText: msg || errorMsg.message } : { error: false, helperText: '' }
+  return errorMsg ? { error: true, helperText: errorMsg.message || msg } : { error: false, helperText: '' }
 }
 
 export function resolvePath(path: string, idx?: number) {
