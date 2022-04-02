@@ -6,6 +6,7 @@ import { DrawerHeader } from './DrawerHeader'
 import { DrawerList } from './DrawerList'
 import { NAVBAR } from '@/shared/config/theme'
 import { ICONS } from '@/assets/svg/icon/Icons'
+import { DrawerStyle } from '@/layouts/AppLayout/Drawer/DrawerStyle'
 
 export const drawerWidth = 300
 
@@ -18,39 +19,17 @@ const DrawerSideConfig: IDrawerSideConfig[] = [
   {
     subheader: '常用功能',
     items: [
-      { title: '主页', path: '/home', icon: ICONS.dashboard },
-      { title: '博客', path: '/blog', icon: ICONS.blog },
+      { title: '主页', path: 'home', icon: ICONS.dashboard },
+      { title: '博客', path: 'blog', icon: ICONS.blog },
     ],
   },
   {
     subheader: 'App',
     items: [
-      { title: 'Todolist', path: '/todolist', icon: ICONS.calendar },
+      { title: 'Todolist', path: 'todolist', icon: ICONS.calendar },
     ],
   },
 ]
-
-const DrawerStyle = styled(MuiDrawer)(({ theme }) => (
-  {
-    [theme.breakpoints.down('sm')]: {
-      'width': '70%',
-      'flexShrink': 0,
-      '& .MuiDrawer-paper': {
-        width: '70%',
-        boxSizing: 'border-box',
-      },
-    },
-    [theme.breakpoints.up('sm')]: {
-      'width': drawerWidth,
-      'flexShrink': 0,
-      '& .MuiDrawer-paper': {
-        width: drawerWidth,
-        boxSizing: 'border-box',
-      },
-    },
-    color: theme.palette.primary.main,
-  }
-))
 
 export function Drawer({ variant, open, onClose, ...props }: DrawerProps) {
   return <>

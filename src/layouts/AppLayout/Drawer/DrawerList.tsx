@@ -1,14 +1,17 @@
 import { Box, List, ListItemText } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { Link, useLocation } from 'react-router-dom'
+import { useMemo } from 'react'
 import { ListItemIconStyle, ListItemStyle, ListSubheaderStyle } from './style'
 import type { IDrawerSideConfig } from '@/layouts/AppLayout/Drawer/Drawer'
+import { resolvePath } from '@/shared/utils/utils'
 
 export function DrawerList({ list }: { list: IDrawerSideConfig[] }) {
   const theme = useTheme()
   const { pathname } = useLocation()
+  const resolvedPathname = resolvePath(pathname)
 
-  const isActive = (path: string) => path === pathname
+  const isActive = (path: string) => path === resolvedPathname
 
   return <Box style={{ padding: '5%' }}>
     {list.map(item => (

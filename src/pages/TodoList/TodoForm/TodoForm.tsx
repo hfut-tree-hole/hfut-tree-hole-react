@@ -49,7 +49,7 @@ type Inputs = {
 }
 
 export function TodoForm({ isSelected = false, payload, handleCancel }: TodoFormProps) {
-  const { register, handleSubmit, control, getValues, formState: { errors } } = useForm<Inputs>({
+  const { register, handleSubmit, getValues, formState: { errors } } = useForm<Inputs>({
     mode: 'onChange',
   })
 
@@ -119,42 +119,33 @@ export function TodoForm({ isSelected = false, payload, handleCancel }: TodoForm
           />
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Controller
-              control={control}
-              render={
-                () => <MobileDateTimePicker
-                  label="开始时间"
-                  inputFormat="yyyy/MM/dd hh:mm a"
-                  renderInput={params => <TextField {...params} {...register('startTime', {
+            <MobileDateTimePicker
+              label="开始时间"
+              inputFormat="yyyy/MM/dd hh:mm a"
+              renderInput={params => <TextField {...params} {...register('startTime', {
+                required: true,
+              })} fullWidth />}
+              onChange={date => setStartDate(date!)}
+              date={startDate}
+              value={startDate}
+            />
+
+            <MobileDateTimePicker
+              label="结束时间"
+              inputFormat="yyyy/MM/dd hh:mm a"
+              onChange={date => setEndDate(date!)}
+              renderInput={params => <TextField
+                {...params} {...register('endTime',
+                  {
                     required: true,
-                  })} fullWidth />}
-                  onChange={date => setStartDate(date!)}
-                  date={startDate}
-                  value={startDate}
-                />
-              } />
-
-            <Controller
-              control={control}
-              render={
-                () => <MobileDateTimePicker
-                  label="结束时间"
-                  inputFormat="yyyy/MM/dd hh:mm a"
-                  onChange={date => setEndDate(date!)}
-                  renderInput={params => <TextField
-                    {...params} {...register('endTime',
-                      {
-                        required: true,
-                        validate: () => getTime(new Date(getValues().endTime)) - getTime(new Date(getValues().startTime)) >= 0,
-                      })}
-                    fullWidth
-                    {...validateWithHelperText(errors.endTime, ' (/= _ =)/~┴┴ 结束时间怎么可能小于开始时间')}
-                  />}
-                  date={endDate}
-                  value={endDate}
-
-                />
-              } />
+                    validate: () => getTime(new Date(getValues().endTime)) - getTime(new Date(getValues().startTime)) >= 0,
+                  })}
+                fullWidth
+                {...validateWithHelperText(errors.endTime, ' (/= _ =)/~┴┴ 结束时间怎么可能小于开始时间')}
+              />}
+              date={endDate}
+              value={endDate}
+            />
           </LocalizationProvider>
 
           <ColorPicker colors={colors} onChange={onColorChange} activeColor={payload?.textColor}/>

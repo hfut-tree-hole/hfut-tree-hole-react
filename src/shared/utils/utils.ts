@@ -11,3 +11,16 @@ export function transformCalendarTime(time: Date) {
 export function validateWithHelperText(errorMsg?: FieldError, msg?: string) {
   return errorMsg ? { error: true, helperText: msg || errorMsg.message } : { error: false, helperText: '' }
 }
+
+export function resolvePath(path: string, idx?: number) {
+  if (!path.includes('/')) {
+    return path
+  }
+  const resolved = path.split('/')
+  const ret = resolved.at(-1)
+  if (!idx) {
+    return ret
+  } else {
+    return resolved[idx]
+  }
+}

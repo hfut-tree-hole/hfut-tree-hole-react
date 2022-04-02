@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box'
-import type { ReactNode } from 'react'
 import { styled } from '@mui/material/styles'
 import type { BoxProps } from '@mui/material/Box/Box'
-import { AppLayoutConfig } from '../../shared/config/layout'
+import { Outlet } from 'react-router-dom'
+import { AppLayoutConfig } from '@/shared/config/layout'
 import { Footer } from '@/components/Footer'
 import { useDrawer } from '@/layouts/AppLayout/use-drawer'
 import { AppHeader } from '@/layouts/AppLayout/Header/Header'
@@ -25,7 +25,7 @@ const RouterView = styled(Box)<BoxProps>(({ theme }) => ({
   overflow: 'hidden',
 }))
 
-export function AppLayout(props: { children: ReactNode }) {
+export function AppLayout() {
   const { open, variant, handleDrawerClose, handleDrawerOpen } = useDrawer()
 
   return (
@@ -42,9 +42,9 @@ export function AppLayout(props: { children: ReactNode }) {
               bgcolor: 'background.default',
             },
           }} />
-        <RouterView
-          children={props.children}
-        />
+        <RouterView>
+          <Outlet />
+        </RouterView>
         <Footer />
       </Box>
     </>

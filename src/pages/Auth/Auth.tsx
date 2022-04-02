@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 export function Auth() {
   return <>
-    <Box className={'width-full height-full flex justify-center'}>
+    <Box className={'width-full height-screen flex justify-center items-center'}>
       <Outlet />
     </Box>
   </>

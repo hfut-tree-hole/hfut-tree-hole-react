@@ -7,34 +7,62 @@ import { Test } from '@/pages/Test/Test'
 import { Auth } from '@/pages/Auth/Auth'
 import { Login } from '@/pages/Auth/Login'
 import { Register } from '@/pages/Auth/Register'
+import { TipLayout } from '@/layouts/TipLayout/TipLayout'
+import { NotFound } from '@/layouts/TipLayout/NotFound/NotFound'
+import { AppLayout } from '@/layouts/AppLayout/AppLayout'
 
 const routes: RouteObject[] = [
   {
+    path: '/app',
+    element: <AppLayout />,
+    children: [
+      {
+        path: '',
+        element: <Navigate to={'home'} />,
+      },
+      {
+        path: 'home',
+        element: <Home />,
+      },
+      {
+        path: 'blog',
+        element: <Blog />,
+      },
+      {
+        path: 'todolist',
+        element: <TodoList />,
+      },
+      {
+        path: 'test',
+        element: <Test />,
+      },
+    ],
+  },
+  {
     path: '/',
-    element: <Navigate to={'/home'} />,
+    element: <Navigate to={'/app'} />,
   },
   {
-    path: '/home',
-    element: <Home />,
-  },
-  {
-    path: '/blog',
-    element: <Blog />,
-  },
-  {
-    path: '/todolist',
-    element: <TodoList />,
-  },
-  {
-    path: '/test',
-    element: <Test />,
-  },
-  {
-    path: '/auth',
+    path: 'auth',
     element: <Auth />,
     children: [
+      { element: <Navigate to={'login'} replace/> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
+    ],
+  },
+  {
+    path: '*',
+    element: <TipLayout />,
+    children: [
+      {
+        path: '404',
+        element: <NotFound />,
+      },
+      {
+        path: '*',
+        element: <Navigate to={'404'} />,
+      },
     ],
   },
 ]
