@@ -1,8 +1,9 @@
-import { Box, Button, Stack, TextField, Typography } from '@mui/material'
+import { Box, Button, Divider, Stack, TextField, Typography } from '@mui/material'
 import { useCallback } from 'react'
 import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import * as _ from 'lodash'
+import { Link } from 'react-router-dom'
 import { validateWithHelperText } from '@/shared/utils/utils'
 import { EmailPattern } from '@/shared/utils/pattern'
 
@@ -22,6 +23,9 @@ export function Register() {
   })
   const handleRegister = useCallback(() => {}, [])
 
+  const onLogin = () => {
+  }
+
   const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
     console.log(data)
   }
@@ -31,7 +35,7 @@ export function Register() {
   }
 
   return <>
-    <Box component={'form'} noValidate onSubmit={handleSubmit(onSubmit, onError)}>
+    <Box component={'form'} noValidate onSubmit={handleSubmit(onSubmit, onError)} className={'relative'}>
       <Stack spacing={3}>
         <Stack direction={'row'} spacing={2}>
           <TextField
@@ -73,6 +77,14 @@ export function Register() {
         <Button sx={{ p: 2 }} variant={'contained'} type={'submit'}>
           <Typography variant={'subtitle1'} onClick={handleRegister}>注册</Typography>
         </Button>
+
+        <Divider />
+
+        <Typography variant={'body2'} className={'text-slate-500'}>
+          <Link to={'/auth/login'}>
+            已经有账号啦？点我去登录
+          </Link>
+        </Typography>
       </Stack>
     </Box>
   </>
