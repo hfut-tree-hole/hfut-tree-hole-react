@@ -22,7 +22,7 @@ export function Auth() {
         }}/>
       </Box>
       <AuthStyle
-        className={'absolute z-3 bg-white p-8 pb-0 flex items-center flex-col w-screen h-screen md:h-auto md:w-3/5 lg:w-2/6'}
+        className={'absolute z-3 bg-white p-8 pb-0 flex items-center flex-col w-screen h-screen md:h-auto md:w-3/5 lg:w-4/12'}
       >
         <Stack spacing={2} className={'mb-8 items-center'}>
           <Logo/>

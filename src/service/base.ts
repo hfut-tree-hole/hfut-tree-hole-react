@@ -15,9 +15,6 @@ const baseInstance = createInstance({ baseURL: ServiceConfig.baseURL })
 
 export function request(config: AxiosRequestConfig = { method: 'get' }) {
   if (!config.method) {
-    if (process.env.mode === 'dev') {
-      console.warn('method cannot be undefined, but system let it to be #get automatically')
-    }
     config.method = 'get'
   }
 

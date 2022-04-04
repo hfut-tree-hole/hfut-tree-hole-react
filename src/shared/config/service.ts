@@ -1,3 +1,3 @@
 export const ServiceConfig = {
-  testURL: 'https://autumnfish.cn',
+  baseURL: 'http://localhost:8000/',
 }

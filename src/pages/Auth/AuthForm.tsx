@@ -3,8 +3,11 @@ import { useCallback, useState } from 'react'
 import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import * as _ from 'lodash'
+import type { AxiosError } from 'axios'
 import { validateWithHelperText } from '@/shared/utils/utils'
 import { EmailPattern } from '@/shared/utils/pattern'
+import { TipMessage } from '@/components/Alert/Alert'
+import { loginRequest, registerRequest } from '@/service/api/auth'
 
 export interface RegisterInputs {
   studentId: number
@@ -23,12 +26,39 @@ export function AuthForm() {
   const handleRegister = useCallback(() => {}, [])
   const [isFirstLogin, setIsFirstLogin] = useState(false)
 
-  const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
-    setIsFirstLogin(true)
+  const handleLogin = useCallback(async(data: RegisterInputs) => {
+    if (!isFirstLogin) {
+      try {
+        await loginRequest(data)
+      } catch (err) {
+        setIsFirstLogin(true)
+      }
+    } else {
+      try {
+        const res = await registerRequest(data) as any
+        TipMessage({
+          message: res.msg,
+          type: 'success',
+        })
+      } catch (err) {
+        TipMessage({
+          message: (err as AxiosError).response!.data.msg,
+          type: 'error',
+        })
+      }
+    }
+  }, [])
+
+  const onSubmit: SubmitHandler<RegisterInputs> = async(data) => {
+    await handleLogin(data as RegisterInputs)
   }
 
   const onError: SubmitErrorHandler<RegisterInputs> = (err) => {
-    console.log(err)
+    TipMessage({
+      message: '同学, 你填写的表单有错误哎Σ(ŎдŎ|||)ﾉﾉ',
+      duration: 5000,
+      type: 'error',
+    })
   }
 
   return <>
