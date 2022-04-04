@@ -11,7 +11,7 @@ export function createInstance(config: AxiosRequestConfig = {}) {
   return instance
 }
 
-const baseInstance = createInstance({ baseURL: ServiceConfig.testURL })
+const baseInstance = createInstance({ baseURL: ServiceConfig.baseURL })
 
 export function request(config: AxiosRequestConfig = { method: 'get' }) {
   if (!config.method) {
