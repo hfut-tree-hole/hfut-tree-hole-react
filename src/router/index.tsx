@@ -5,8 +5,6 @@ import { Blog } from '@/pages/Blog/Blog'
 import { TodoList } from '@/pages/TodoList/TodoList'
 import { Test } from '@/pages/Test/Test'
 import { Auth } from '@/pages/Auth/Auth'
-import { Login } from '@/pages/Auth/Login'
-import { Register } from '@/pages/Auth/Register'
 import { TipLayout } from '@/layouts/TipLayout/TipLayout'
 import { NotFound } from '@/layouts/TipLayout/NotFound/NotFound'
 import { AppLayout } from '@/layouts/AppLayout/AppLayout'
@@ -43,13 +41,8 @@ const routes: RouteObject[] = [
     element: <Navigate to={'/app'} />,
   },
   {
-    path: 'auth',
+    path: '/auth',
     element: <Auth />,
-    children: [
-      { element: <Navigate to={'login'} replace/> },
-      { path: 'login', element: <Login /> },
-      { path: 'register', element: <Register /> },
-    ],
   },
   {
     path: '*',
