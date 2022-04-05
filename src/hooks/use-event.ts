@@ -7,6 +7,7 @@ interface InferEventTarget<Events> {
   removeEventListener(event: Events, fn?: any, options?: any): any
 }
 
+// The hook can be used to add and remove event listeners automatically
 export function useEvent(
   target: InferEventTarget<string> = window,
   name: string,
