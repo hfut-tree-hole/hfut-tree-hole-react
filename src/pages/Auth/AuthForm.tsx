@@ -3,11 +3,14 @@ import { useCallback, useState } from 'react'
 import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import * as _ from 'lodash'
-import type { AxiosError } from 'axios'
+import storage from 'good-storage'
+import { useNavigate } from 'react-router-dom'
 import { validateWithHelperText } from '@/shared/utils/utils'
 import { EmailPattern } from '@/shared/utils/pattern'
 import { TipMessage } from '@/components/Alert/Alert'
 import { loginRequest, registerRequest } from '@/service/api/auth'
+import { wrapAsync } from '@/hooks/use-async'
+import { TOKEN_KEY } from '@/shared/constant'
 
 export interface RegisterInputs {
   studentId: number
@@ -23,34 +26,54 @@ export function AuthForm() {
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterInputs>({
     mode: 'onChange',
   })
+  const navigate = useNavigate()
   const handleRegister = useCallback(() => {}, [])
   const [isFirstLogin, setIsFirstLogin] = useState(false)
 
   const handleLogin = useCallback(async(data: RegisterInputs) => {
     if (!isFirstLogin) {
-      try {
-        await loginRequest(data)
-      } catch (err) {
-        setIsFirstLogin(true)
+      const { state, error } = await wrapAsync(() => loginRequest(data))
+      if (error) {
+        if (error.status === 406) {
+          TipMessage({
+            message: error.data.msg,
+            type: 'error',
+          })
+        } else if (error.status === 404) {
+          // it means this time is the user's first login
+          setIsFirstLogin(true)
+        }
       }
-    } else {
-      try {
-        const res = await registerRequest(data) as any
+      if (state) {
         TipMessage({
-          message: res.msg,
+          message: state.data.msg,
           type: 'success',
         })
-      } catch (err) {
+        storage.set(TOKEN_KEY, state.data.token)
+        navigate('/')
+      }
+    } else {
+      const { state, error } = await wrapAsync(() => registerRequest(data))
+      if (error) {
         TipMessage({
-          message: (err as AxiosError).response!.data.msg,
+          message: error.data.msg,
           type: 'error',
         })
       }
+      if (state) {
+        const response = state.data
+        TipMessage({
+          message: response.msg,
+          type: 'success',
+        })
+        storage.set(TOKEN_KEY, response.token)
+        navigate('/')
+      }
     }
-  }, [])
+  }, [isFirstLogin])
 
-  const onSubmit: SubmitHandler<RegisterInputs> = async(data) => {
-    await handleLogin(data as RegisterInputs)
+  const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
+    handleLogin(data as RegisterInputs)
   }
 
   const onError: SubmitErrorHandler<RegisterInputs> = (err) => {
